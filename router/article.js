@@ -1,0 +1,10 @@
+const express = require('express')
+const router = express.Router()
+const muter = express('muter')
+const path = express('path')
+const upload = muter({dest:path.join(__dirname,'../upload')})
+const article_handler = express('../router_handler/article.js')
+const expressJoi = require('@escook/express-joi')
+const {add_article_schema} = require('../schema/article')
+router.post('/add',upload.sing('cover_img'),expressJoi(add_article_schema),article_handler.addArticle)
+module.exports = router
